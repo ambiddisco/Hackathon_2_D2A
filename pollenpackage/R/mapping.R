@@ -31,12 +31,6 @@ library(ggplot2)
 #'
 #' @returns Nothing, plots graph directly
 #' @export
-#'
-#' @examples plot_map(
-#'   canton_path = "path_to_canton_file.shp",
-#'   mountain_path = "path_to_mountain_file.shp",
-#'   lake_path = "path_to_lake_file.shp",
-#'   title="Map")
 plot_map <- function(
     canton_path,
     mountain_path,
@@ -97,7 +91,7 @@ plot_map <- function(
         colnames(interp_df) <- c("x", "y", "value")
 
         p <- p +
-          geom_raster(data = interp_df, aes(x = x, y = y, fill = value, alpha = value)) +
+          geom_raster(data = interp_df, aes(x = x, y = y, fill = value, alpha = pmin(pmax(value, 0), 3))) +
           scale_fill_gradientn(
             colours = c(NA, "blue", "orange", "red"),
             na.value = NA,
