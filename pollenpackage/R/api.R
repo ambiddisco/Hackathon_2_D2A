@@ -1,5 +1,4 @@
 library(httr2)
-library(tidyverse)
 
 #' get_pollen_forecast: fetches information from api and loads the data.
 #'
