@@ -59,3 +59,14 @@ plot_cantons <- function(
   print(p)
 }
 
+
+df <- read.csv("canton_pollen_aggregated.csv")
+
+plot_cantons(
+  canton_path = "kanton/K4kant20220101gf_ch2007Poly.shp",
+  lake_path = "see/k4seenyyyymmdd11_ch2007Poly.shp",
+  value_df = df,
+  value_colname = "avg",
+  title = "Map by Canton"
+)
+
