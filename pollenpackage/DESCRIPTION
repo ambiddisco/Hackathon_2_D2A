@@ -3,47 +3,13 @@ Type: Package
 Title: Hackathon Final Project - Pollen Analysis in Switzerland
 Version: 0.1.0
 Authors@R: c(
-    person(
-      "Alexandra", "Biddiscombe",
-      github = "https://github.com/ambiddisco",
-      role = c("aut", "cre")
-    ),
-    person(
-      "Alessandro", "Carnio",
-      github = "https://github.com/qLessqndr",
-      role = c("aut", "cre")
-    ),
-    person(
-      "Manuel", "Cattoni",
-      github = "https://github.com/ManuCa93",
-      role = c("aut", "cre")
-    ),
-    person(
-      "Paolo", "Nicolet",
-      github = "https://github.com/PaoloNicolet",
-      role = c("aut", "cre")
-    ),
-    person(
-      "Kadir", "Özden",
-      github = "https://github.com/tatarkadir",
-      role = c("aut", "cre")
-    ),
-    person(
-      "Tommaso", "Pioda",
-      github = "https://github.com/Thetommigun432",
-      role = c("aut", "cre")
-    ),
+    person("Alexandra", "Biddiscombe", email = "alex@example.com", role = c("aut", "cre")),
+    person("Alessandro", "Carnio", role = "aut"),
+    person("Manuel", "Cattoni", role = "aut"),
+    person("Paolo", "Nicolet", role = "aut"),
+    person("Kadir", "Özden", role = "aut"),
+    person("Tommaso", "Pioda", role = "aut")
   )
-Maintainer: c(
-    person(
-      "Paolo", "Nicolet",
-      <paolo.nicolet@student.supsi.ch>
-      ),
-    person(
-      "Alexandra", "Biddiscombe",
-      <alexandra.biddiscombe@student.supsi.ch>
-      )
-    )
 Description: This package contains exploration of pollen statistics in Switzerland.
     It is created by Group 2 of the Hackathon Final project.
 License: MIT + file LICENSE
