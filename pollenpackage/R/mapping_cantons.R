@@ -1,4 +1,10 @@
-#' plot_cantons is a function that plots cantons data
+library(ggplot2)
+library(sf)
+library(dplyr)
+library(tidyr)
+library(viridis)
+
+#' plot_cantons is a function that plots
 #'
 #' @param canton_path a string value, defines path to canton data
 #' @param lake_path a string value, defines path to lake data
@@ -9,9 +15,7 @@
 #' @param title a string value, determines the overall title of the plot
 #'
 #' @returns Nothing, directly plots a map of cantons
-#' @import sf
-#' @import ggplot2
-#' @export dplyr
+#' @export
 #'
 #' @examples plot_cantons(canton_path = "path_to_cantons",
 #'                       lake_path = "path_to_lake",
@@ -28,8 +32,8 @@ plot_cantons <- function(
     title = "Map"
 ) {
 
-  cantons <- sf::st_read(canton_path, quiet = TRUE) |> sf::st_transform(map_crs)
-  lakes <- if (!is.null(lake_path)) sf::st_read(lake_path, quiet = TRUE) |> sf::st_transform(map_crs) else NULL
+  cantons <- sf::st_read(get_map_path("kanton"), quiet = TRUE) |> sf::st_transform(map_crs)
+  lakes <-  st_read(get_map_path("see"), quiet = TRUE) |> st_transform(map_crs)
 
   value_df <- value_df |>
     dplyr::rename(name = canton) |>
@@ -46,7 +50,7 @@ plot_cantons <- function(
 
   p <- p +
     scale_fill_viridis_c(option = "plasma", na.value = "grey90", name = value_colname)
-    ggplot2::ggtitle(paste(title, value_colname)) +
+  ggplot2::ggtitle(paste(title, value_colname)) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
       plot.background = ggplot2::element_rect(fill = "white", color = NA),
@@ -58,15 +62,3 @@ plot_cantons <- function(
 
   print(p)
 }
-
-
-df <- read.csv("canton_pollen_aggregated.csv")
-
-plot_cantons(
-  canton_path = "kanton/K4kant20220101gf_ch2007Poly.shp",
-  lake_path = "see/k4seenyyyymmdd11_ch2007Poly.shp",
-  value_df = df,
-  value_colname = "avg",
-  title = "Map by Canton"
-)
-
