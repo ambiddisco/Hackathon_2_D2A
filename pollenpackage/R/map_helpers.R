@@ -19,10 +19,10 @@ get_map_path <- function(type = c("see", "kanton", "berggebiete"),
       type,
       see = "k4seenyyyymmdd11_ch2007Poly.shp",
       kanton = "k4seenyyyymmdd22_ch2007Poly.shp",
-      berggebiete = "k4seenyyyymmdd33_ch2007Poly.shp",  # <- adjust as needed
+      berggebiete = "k4seenyyyymmdd33_ch2007Poly.shp",
       stop("Unknown map type")
     )
   }
 
-  system.file("extdata/maps", type, filename, package = "yourpackagename", mustWork = TRUE)
+  system.file("extdata/maps", type, filename, package = "pollenpackage", mustWork = TRUE)
 }

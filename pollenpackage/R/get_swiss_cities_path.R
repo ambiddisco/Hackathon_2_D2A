@@ -9,5 +9,5 @@
 #' @examples
 #' readr::read_csv(get_swiss_cities_path())
 get_swiss_cities_path <- function() {
-  system.file("extdata", "SwissCities.csv", package = "yourpackagename", mustWork = TRUE)
+  system.file("extdata", "SwissCities.csv", package = "pollenpackage", mustWork = TRUE)
 }
