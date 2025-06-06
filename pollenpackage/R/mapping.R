@@ -39,14 +39,15 @@ plot_map <- function(
     points_df = NULL,
     points_crs = 4326,
     map_crs = 2056,
-    base_fill = "darkseagreen3",
-    mountain_fill = "bisque3",
+    base_fill = rgb(176/256, 227/256, 170/256),
+    mountain_fill = "antiquewhite2",
     lake_fill = "lightblue",
     border_color = "black",
     point_color = "red",
     point_size = 2,
     show_labels = TRUE,
-    title = "Map"
+    title = "Map",
+    point_color = "avg"
 ) {
 
   cantons <- st_read(canton_path, quiet = TRUE) |> st_transform(map_crs)
@@ -69,9 +70,9 @@ plot_map <- function(
   if (!is.null(points_df)) {
     points_sf <- st_as_sf(points_df, coords = c("lon", "lat"), crs = points_crs) |>
       st_transform(map_crs)
-    if ("value" %in% colnames(points_df)) {
-      p <- p + geom_sf(data = points_sf, aes(color = value), size = point_size) +
-        scale_color_viridis_c(option = "plasma")
+    if (!is.null(point_color) && point_color %in% colnames(points_df)) {
+      p <- p + geom_sf(data = points_sf, aes(color = .data[[point_color]]), size = point_size) +
+        scale_color_viridis_c(option = "plasma", name = point_color)
     } else {
       p <- p + geom_sf(data = points_sf, color = point_color, size = point_size)
     }
@@ -97,7 +98,7 @@ plot_map <- function(
     )
 
   print(p)
-# }
+}
 
 
 
