@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(PollenAnalysis)
+library(pollenpackage)          
 
-test_check("PollenAnalysis")
+test_check("pollenpackage")

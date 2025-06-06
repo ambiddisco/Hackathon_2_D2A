@@ -18,8 +18,8 @@ get_map_path <- function(type = c("see", "kanton", "berggebiete"),
     filename <- switch(
       type,
       see = "k4seenyyyymmdd11_ch2007Poly.shp",
-      kanton = "k4seenyyyymmdd22_ch2007Poly.shp",
-      berggebiete = "k4seenyyyymmdd33_ch2007Poly.shp",
+      kanton = "K4kant20220101gf_ch2007Poly.shp",
+      berggebiete = "K4_bgbr20210101gf_ch2007Poly.shp",
       stop("Unknown map type")
     )
   }
