@@ -31,15 +31,10 @@ library(ggplot2)
 #' @returns Nothing, plots graph directly
 #' @export
 #'
-#' @examples plot_map(
-#'   canton_path = "path_to_canton_file.shp",
-#'   mountain_path = "path_to_mountain_file.shp",
-#'   lake_path = "path_to_lake_file.shp",
-#'   title="Map")
 plot_map <- function(
-    canton_path,
-    mountain_path,
-    lake_path = NULL,
+    canton_type = "kanton",
+    mountain_type = "berggebiete",
+    lake_type = NULL,
     points_df = NULL,
     points_crs = 4326,
     map_crs = 2056,
@@ -52,33 +47,39 @@ plot_map <- function(
     show_labels = TRUE,
     title = "Map"
 ) {
-
+  # Load spatial data using helper
+  canton_path <- get_map_path(canton_type)
+  mountain_path <- get_map_path(mountain_type)
+  lake_path <- if (!is.null(lake_type)) get_map_path(lake_type) else NULL
+  
   cantons <- st_read(canton_path, quiet = TRUE) |> st_transform(map_crs)
   mountains <- st_read(mountain_path, quiet = TRUE) |> st_transform(map_crs)
   lakes <- if (!is.null(lake_path)) st_read(lake_path, quiet = TRUE) |> st_transform(map_crs) else NULL
-
-  #BASE COL
+  
+  # Base map
   p <- ggplot() +
     geom_sf(data = cantons, fill = base_fill, color = NA) +
     geom_sf(data = mountains, fill = mountain_fill, color = NA, alpha = 1)
-
-  #LAKES
+  
+  # Lakes
   if (!is.null(lakes)) {
     p <- p + geom_sf(data = lakes, fill = lake_fill, color = NA, alpha = 1)
   }
-  #BORDERS
+  
+  # Borders
   p <- p + geom_sf(data = cantons, fill = NA, color = border_color, size = 0.5)
-
-  #PLOT POINTS
+  
+  # Points
   if (!is.null(points_df)) {
-    points_sf <- st_as_sf(points_df, coords = c("lon", "lat"), crs = points_crs) |>
-      st_transform(map_crs)
+    points_sf <- st_as_sf(points_df, coords = c("lon", "lat"), crs = points_crs) |> st_transform(map_crs)
+    
     if (!is.null(point_color) && point_color %in% colnames(points_df)) {
       p <- p + geom_sf(data = points_sf, aes(color = .data[[point_color]]), size = point_size) +
         scale_color_viridis_c(option = "plasma", name = point_color)
     } else {
       p <- p + geom_sf(data = points_sf, color = point_color, size = point_size)
     }
+    
     if (show_labels && "label" %in% colnames(points_df)) {
       coords <- st_coordinates(points_sf)
       points_sf$X <- coords[,1]
@@ -87,8 +88,8 @@ plot_map <- function(
                          size = 3, color = "black", nudge_y = 1000)
     }
   }
-
-  #PLOTTING AND STYLING
+  
+  # Styling
   p <- p +
     ggtitle(title) +
     theme_minimal() +
@@ -99,15 +100,6 @@ plot_map <- function(
       axis.ticks = element_blank(),
       panel.grid = element_blank()
     )
-
+  
   print(p)
 }
-
-
-
-plot_map(
-  canton_path = "kanton/K4kant20220101gf_ch2007Poly.shp",
-  mountain_path = "berggebiete/K4_bgbr20210101gf_ch2007Poly.shp",
-  lake_path = "see/k4seenyyyymmdd11_ch2007Poly.shp",
-  title = "Map"
-)

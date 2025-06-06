@@ -1,7 +1,8 @@
 #' Swiss Cities Dataset
 #'
 #' This dataset includes 200 Swiss cities with their geographic coordinates and population.
-#'
+#' 
+#' @name SwissCities
 #' @format A CSV file with the following columns:
 #' \describe{
 #'   \item{name}{City name (character)}
@@ -19,4 +20,4 @@
 #' path <- get_swiss_cities_path()
 #' swiss_cities <- readr::read_csv(path)
 #' head(swiss_cities)
-"SwissCities.csv"
+NULL
