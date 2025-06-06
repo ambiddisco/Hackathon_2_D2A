@@ -1,9 +1,3 @@
-library(ggplot2)
-library(sf)
-library(dplyr)
-library(tidyr)
-library(viridis)
-
 #' plot_cantons is a function that plots
 #'
 #' @param canton_path a string value, defines path to canton data
@@ -15,6 +9,9 @@ library(viridis)
 #' @param title a string value, determines the overall title of the plot
 #'
 #' @returns Nothing, directly plots a map of cantons
+#' @import sf
+#' @import dplyr
+#' @import ggplot2
 #' @export
 #'
 #' @examples plot_cantons(canton_path = "path_to_cantons",
