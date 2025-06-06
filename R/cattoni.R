@@ -29,10 +29,9 @@ df <- data.frame(city = character(),
                  Mugwort = numeric(),
                  stringsAsFactors = FALSE)
 
-counts = c(1,2,3)
 
 # Iterare attraverso le città nel dataframe
-for (count in counts) {
+for (count in 1:nrow(swiss_cities)) {
   # Prelevare le informazioni della città
   lat <- swiss_cities$lat[count]
   lng <- swiss_cities$lng[count]
