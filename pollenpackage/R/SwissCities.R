@@ -15,9 +15,10 @@
 #' @source Provided as part of the Hackathon 2025 materials.
 #'
 #' @seealso [get_swiss_cities_path()]
-#'
 #' @examples
-#' path <- get_swiss_cities_path()
-#' swiss_cities <- readr::read_csv(path)
-#' head(swiss_cities)
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   path <- get_swiss_cities_path()
+#'   swiss_cities <- readr::read_csv(path)
+#'   head(swiss_cities)
+#' }
 NULL

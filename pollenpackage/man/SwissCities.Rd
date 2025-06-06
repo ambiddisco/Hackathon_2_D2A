@@ -22,9 +22,11 @@ This dataset includes 200 Swiss cities with their geographic coordinates and pop
 The file is stored in `inst/extdata/SwissCities.csv` and accessed via the helper function [get_swiss_cities_path()].
 }
 \examples{
-path <- get_swiss_cities_path()
-swiss_cities <- readr::read_csv(path)
-head(swiss_cities)
+if (requireNamespace("readr", quietly = TRUE)) {
+  path <- get_swiss_cities_path()
+  swiss_cities <- readr::read_csv(path)
+  head(swiss_cities)
+}
 }
 \seealso{
 [get_swiss_cities_path()]

@@ -1,10 +1,4 @@
-library(ggplot2)
-library(sf)
-library(dplyr)
-library(tidyr)
-library(viridis)
-
-#' plot_cantons is a function that plots
+#' plot_cantons is a function that plots cantons data
 #'
 #' @param canton_path a string value, defines path to canton data
 #' @param lake_path a string value, defines path to lake data
@@ -15,7 +9,9 @@ library(viridis)
 #' @param title a string value, determines the overall title of the plot
 #'
 #' @returns Nothing, directly plots a map of cantons
-#' @export
+#' @import sf
+#' @import ggplot2
+#' @export dplyr
 #'
 #' @examples plot_cantons(canton_path = "path_to_cantons",
 #'                       lake_path = "path_to_lake",
@@ -63,15 +59,3 @@ plot_cantons <- function(
   print(p)
 }
 
-
-
-
-df <- read.csv("canton_pollen_aggregated.csv")
-
-plot_cantons(
-  canton_path = "kanton/K4kant20220101gf_ch2007Poly.shp",
-  lake_path = "see/k4seenyyyymmdd11_ch2007Poly.shp",
-  value_df = df,
-  value_colname = "avg",
-  title = "Map by Canton"
-)
