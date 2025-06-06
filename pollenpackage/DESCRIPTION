@@ -11,10 +11,13 @@ Authors@R: c(
     person("Tommaso", "Pioda", role = "aut")
   )
 Description: This package contains exploration of pollen statistics in Switzerland.
-    It is created by Group 2 of the Hackathon Final project.
+  It is created by Group 2 of the Hackathon Final project.
+Imports: sf,
+  ggplot2
+Suggests: testthat (>= 3.0.0),
+  knitr,
+  rmarkdown
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: 
-    testthat (>= 3.0.0)
 Config/testthat/edition: 3
