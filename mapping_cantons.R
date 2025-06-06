@@ -17,7 +17,12 @@ library(viridis)
 #' @returns Nothing, directly plots a map of cantons
 #' @export
 #'
-#' @examples
+#' @examples plot_cantons(canton_path = "path_to_cantons",
+#'                       lake_path = "path_to_lake",
+#'                       value_df = df,
+#'                       value_colname = "avg",
+#'                       title = "Map of Cantons") -> NONE
+
 plot_cantons <- function(
     canton_path,
     lake_path = NULL,
