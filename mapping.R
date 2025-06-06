@@ -58,7 +58,7 @@ plot_map <- function(
         colnames(interp_df) <- c("x", "y", "value")
         
         p <- p + 
-          geom_raster(data = interp_df, aes(x = x, y = y, fill = value, alpha = pmin(pmax(value, 0), 0.75))) +
+          geom_raster(data = interp_df, aes(x = x, y = y, fill = value, alpha = pmin(pmax(value, 0), 3))) +
           scale_fill_gradientn(
             colours = c(NA, "blue", "orange", "red"),
             na.value = NA,
