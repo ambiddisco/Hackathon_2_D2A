@@ -22,6 +22,12 @@ plot_map(
 )
 }
 \arguments{
+\item{canton_type}{the path to the file containing canton data}
+
+\item{mountain_type}{the path to the file containing mountain data}
+
+\item{lake_type}{the path to the file containing lake data}
+
 \item{points_df}{a tibble or dataframe, contains a list of all points to be
 plotted on the graph. Basic value is NONE.}
 
@@ -53,12 +59,6 @@ points in the graph}
 \item{show_labels}{a boolean value, if to show the labels of the graph}
 
 \item{title}{the title of the graph}
-
-\item{canton_path}{the path to the file containing canton data}
-
-\item{mountain_path}{the path to the file containing mountain data}
-
-\item{lake_path}{the path to the file containing lake data}
 }
 \value{
 Nothing, plots graph directly

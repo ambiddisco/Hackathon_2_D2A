@@ -3,9 +3,9 @@ library(ggplot2)
 
 #' Title
 #'
-#' @param canton_path the path to the file containing canton data
-#' @param mountain_path the path to the file containing mountain data
-#' @param lake_path the path to the file containing lake data
+#' @param canton_type the path to the file containing canton data
+#' @param mountain_type the path to the file containing mountain data
+#' @param lake_type the path to the file containing lake data
 #' @param points_df a tibble or dataframe, contains a list of all points to be
 #' plotted on the graph. Basic value is NONE.
 #' @param points_crs an integer value, crs stands for coordinate reference system,
@@ -52,53 +52,53 @@ plot_map <- function(
   mountain_path <- get_map_path(mountain_type)
   lake_path <- if (!is.null(lake_type)) get_map_path(lake_type) else NULL
   
-  cantons <- st_read(canton_path, quiet = TRUE) |> st_transform(map_crs)
-  mountains <- st_read(mountain_path, quiet = TRUE) |> st_transform(map_crs)
-  lakes <- if (!is.null(lake_path)) st_read(lake_path, quiet = TRUE) |> st_transform(map_crs) else NULL
+  cantons <- sf::st_read(canton_path, quiet = TRUE) |> sf::st_transform(map_crs)
+  mountains <- sf::st_read(mountain_path, quiet = TRUE) |> sf::st_transform(map_crs)
+  lakes <- if (!is.null(lake_path)) sf::st_read(lake_path, quiet = TRUE) |> sf::st_transform(map_crs) else NULL
   
   # Base map
-  p <- ggplot() +
-    geom_sf(data = cantons, fill = base_fill, color = NA) +
-    geom_sf(data = mountains, fill = mountain_fill, color = NA, alpha = 1)
+  p <- ggplot2::ggplot() +
+    ggplot2::geom_sf(data = cantons, fill = base_fill, color = NA) +
+    ggplot2::geom_sf(data = mountains, fill = mountain_fill, color = NA, alpha = 1)
   
   # Lakes
   if (!is.null(lakes)) {
-    p <- p + geom_sf(data = lakes, fill = lake_fill, color = NA, alpha = 1)
+    p <- p + ggplot2::geom_sf(data = lakes, fill = lake_fill, color = NA, alpha = 1)
   }
   
   # Borders
-  p <- p + geom_sf(data = cantons, fill = NA, color = border_color, size = 0.5)
+  p <- p + ggplot2::geom_sf(data = cantons, fill = NA, color = border_color, size = 0.5)
   
   # Points
   if (!is.null(points_df)) {
-    points_sf <- st_as_sf(points_df, coords = c("lon", "lat"), crs = points_crs) |> st_transform(map_crs)
+    points_sf <- sf::st_as_sf(points_df, coords = c("lon", "lat"), crs = points_crs) |> sf::st_transform(map_crs)
     
     if (!is.null(point_color) && point_color %in% colnames(points_df)) {
-      p <- p + geom_sf(data = points_sf, aes(color = .data[[point_color]]), size = point_size) +
-        scale_color_viridis_c(option = "plasma", name = point_color)
+      p <- p + ggplot2::geom_sf(data = points_sf, ggplot2::aes(color = .data[[point_color]]), size = point_size) +
+        ggplot2::scale_color_viridis_c(option = "plasma", name = point_color)
     } else {
-      p <- p + geom_sf(data = points_sf, color = point_color, size = point_size)
+      p <- p + ggplot2::geom_sf(data = points_sf, color = point_color, size = point_size)
     }
     
     if (show_labels && "label" %in% colnames(points_df)) {
-      coords <- st_coordinates(points_sf)
+      coords <- sf::st_coordinates(points_sf)
       points_sf$X <- coords[,1]
       points_sf$Y <- coords[,2]
-      p <- p + geom_text(data = points_sf, aes(x = X, y = Y, label = label),
-                         size = 3, color = "black", nudge_y = 1000)
+      p <- p + ggplot2::geom_text(data = points_sf, ggplot2::aes(x = X, y = Y, label = label),
+                                  size = 3, color = "black", nudge_y = 1000)
     }
   }
   
   # Styling
   p <- p +
-    ggtitle(title) +
-    theme_minimal() +
-    theme(
-      plot.background = element_rect(fill = "white", color = NA),
-      panel.background = element_rect(fill = "white", color = NA),
-      axis.text = element_blank(),
-      axis.ticks = element_blank(),
-      panel.grid = element_blank()
+    ggplot2::ggtitle(title) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      plot.background = ggplot2::element_rect(fill = "white", color = NA),
+      panel.background = ggplot2::element_rect(fill = "white", color = NA),
+      axis.text = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      panel.grid = ggplot2::element_blank()
     )
   
   print(p)
