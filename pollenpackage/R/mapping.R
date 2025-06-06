@@ -31,7 +31,11 @@ library(ggplot2)
 #' @returns Nothing, plots graph directly
 #' @export
 #'
-#' @examples
+#' @examples plot_map(
+#'   canton_path = "path_to_canton_file.shp",
+#'   mountain_path = "path_to_mountain_file.shp",
+#'   lake_path = "path_to_lake_file.shp",
+#'   title="Map")
 plot_map <- function(
     canton_path,
     mountain_path,
