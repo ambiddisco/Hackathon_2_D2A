@@ -14,5 +14,5 @@ This function returns the full path to the SwissCities.csv file
 located in inst/extdata/.
 }
 \examples{
-swiss_cities <- read.csv(path)
+swiss_cities <- read.csv(get_swiss_cities_path())
 }

@@ -1,9 +1,7 @@
-library(httr2)
-
 #' get_pollen_forecast: fetches information from api and loads the data.
-#' @importFrom httr2 request req_perform resp_body_json
 #'
 #' @returns a dataframe containing all information about pollen forecast.
+#' @import httr2
 #' @export
 #'
 #' @examples get_pollen_forecast() -> pollen_df

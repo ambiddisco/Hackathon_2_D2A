@@ -3,9 +3,9 @@ library(ggplot2)
 
 #' Title
 #'
-#' @param canton_type the path to the file containing canton data
-#' @param mountain_type the path to the file containing mountain data
-#' @param lake_type the path to the file containing lake data
+#' @param canton_path the path to the file containing canton data
+#' @param mountain_path the path to the file containing mountain data
+#' @param lake_path the path to the file containing lake data
 #' @param points_df a tibble or dataframe, contains a list of all points to be
 #' plotted on the graph. Basic value is NONE.
 #' @param points_crs an integer value, crs stands for coordinate reference system,
@@ -27,8 +27,10 @@ library(ggplot2)
 #' @param point_size an integer value, size of the points on the graph
 #' @param show_labels a boolean value, if to show the labels of the graph
 #' @param title the title of the graph
-#'
+#' @param heatmap a boolean value; if TRUE, plots points as a heatmap based on the `point_color` column
 #' @returns Nothing, plots graph directly
+#' @import raster
+#' @import gstat
 #' @export
 #'
 plot_map <- function(

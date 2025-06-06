@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' swiss_cities <- read.csv(path)
+#' swiss_cities <- read.csv(get_swiss_cities_path())
 get_swiss_cities_path <- function() {
   system.file("extdata", "SwissCities.csv", package = "pollenpackage", mustWork = TRUE)
 }
