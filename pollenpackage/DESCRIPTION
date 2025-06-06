@@ -3,7 +3,7 @@ Type: Package
 Title: Hackathon Final Project - Pollen Analysis in Switzerland
 Version: 0.1.0
 Authors@R: c(
-    person("Alexandra", "Biddiscombe", email = "alex@example.com", role = c("aut", "cre")),
+    person("Alexandra", "Biddiscombe", email = "alexandra.bidiscombe@student.supsi.ch", role = c("aut", "cre")),
     person("Alessandro", "Carnio", role = "aut"),
     person("Manuel", "Cattoni", role = "aut"),
     person("Paolo", "Nicolet", role = "aut"),
