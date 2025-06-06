@@ -46,8 +46,7 @@ plot_map <- function(
     point_color = "red",
     point_size = 2,
     show_labels = TRUE,
-    title = "Map",
-    point_color = "avg"
+    title = "Map"
 ) {
 
   cantons <- st_read(canton_path, quiet = TRUE) |> st_transform(map_crs)
