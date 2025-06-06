@@ -31,7 +31,7 @@ get_pollen_forecast <- function(){
                    stringsAsFactors = FALSE)
 
   # Iterate through the cities in the dataframe
-  for (count in 1:10) {
+  for (count in 1:nrow(swiss_cities)) {
     # Retrieve city information (latitude, longitude, and city name)
     lat <- swiss_cities$lat[count]
     lng <- swiss_cities$lng[count]
