@@ -1,11 +1,8 @@
 library(sf)
 library(ggplot2)
 
-#' Title
+#' plot_map plots a map of Switzerland with data about pollen
 #'
-#' @param canton_path the path to the file containing canton data
-#' @param mountain_path the path to the file containing mountain data
-#' @param lake_path the path to the file containing lake data
 #' @param points_df a tibble or dataframe, contains a list of all points to be
 #' plotted on the graph. Basic value is NONE.
 #' @param points_crs an integer value, crs stands for coordinate reference system,
@@ -34,9 +31,6 @@ library(ggplot2)
 #' @export
 #'
 plot_map <- function(
-    canton_path,
-    mountain_path,
-    lake_path = NULL,
     points_df = NULL,
     points_crs = 4326,
     map_crs = 2056,
@@ -51,9 +45,9 @@ plot_map <- function(
     heatmap = FALSE
 ) {
 
-  cantons <- st_read(canton_path, quiet = TRUE) |> st_transform(map_crs)
-  mountains <- st_read(mountain_path, quiet = TRUE) |> st_transform(map_crs)
-  lakes <- if (!is.null(lake_path)) st_read(lake_path, quiet = TRUE) |> st_transform(map_crs) else NULL
+  cantons <- st_read(get_map_path("kanton"), quiet = TRUE) |> st_transform(map_crs)
+  mountains <- st_read(get_map_path("berggebiete"), quiet = TRUE) |> st_transform(map_crs)
+  lakes <-  st_read(get_map_path("see"), quiet = TRUE) |> st_transform(map_crs)
 
   p <- ggplot() +
     geom_sf(data = cantons, fill = base_fill, color = NA) +
@@ -120,7 +114,7 @@ plot_map <- function(
   }
 
   p <- p +
-    ggtitle(title) +
+    ggtitle(paste(title, point_color)) +
     theme_minimal() +
     theme(
       plot.background = element_rect(fill = "white", color = NA),
