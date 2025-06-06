@@ -35,6 +35,16 @@ Authors@R: c(
     ),
     
   )
+Maintainer: c(
+    person(
+      "Paolo", "Nicolet",
+      <paolo.nicolet@student.supsi.ch>
+      ),
+    person(
+      "Alexandra", "Biddiscombe",
+      <alexandra.biddiscombe@student.supsi.ch>
+      )
+    )
 Description: This package contains exploration of pollen statistics in Switzerland.
     It is created by Group 2 of the Hackathon Final project.
 License: MIT OpenSource License
