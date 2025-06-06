@@ -5,29 +5,24 @@
 \title{Title}
 \usage{
 plot_map(
-  canton_type = "kanton",
-  mountain_type = "berggebiete",
-  lake_type = NULL,
+  canton_path,
+  mountain_path,
+  lake_path = NULL,
   points_df = NULL,
   points_crs = 4326,
   map_crs = 2056,
-  base_fill = rgb(176/256, 227/256, 170/256),
-  mountain_fill = "antiquewhite2",
+  base_fill = rgb(217/256, 252/256, 221/256),
+  mountain_fill = rgb(252/256, 244/256, 217/256),
   lake_fill = "lightblue",
   border_color = "black",
   point_color = "red",
   point_size = 2,
   show_labels = TRUE,
-  title = "Map"
+  title = "Map",
+  heatmap = FALSE
 )
 }
 \arguments{
-\item{canton_type}{the path to the file containing canton data}
-
-\item{mountain_type}{the path to the file containing mountain data}
-
-\item{lake_type}{the path to the file containing lake data}
-
 \item{points_df}{a tibble or dataframe, contains a list of all points to be
 plotted on the graph. Basic value is NONE.}
 
@@ -59,6 +54,14 @@ points in the graph}
 \item{show_labels}{a boolean value, if to show the labels of the graph}
 
 \item{title}{the title of the graph}
+
+\item{heatmap}{a boolean value, indicates if to include a heatmap of the data}
+
+\item{canton_type}{the path to the file containing canton data}
+
+\item{mountain_type}{the path to the file containing mountain data}
+
+\item{lake_type}{the path to the file containing lake data}
 }
 \value{
 Nothing, plots graph directly

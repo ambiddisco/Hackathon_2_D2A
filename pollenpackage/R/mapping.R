@@ -124,7 +124,7 @@ plot_map <- function(
   }
 
   p <- p +
-    ggplot2::ggtitle(title) +
+    ggplot2::ggtitle(paste(title, point_color)) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
       plot.background = ggplot2::element_rect(fill = "white", color = NA),
@@ -137,20 +137,3 @@ plot_map <- function(
   print(p)
 }
 
-
-
-#TESTING
-file_name = "swiss_city_pollen_data.csv"
-df = read.csv(file_name)
-
-
-plot_map(
-  canton_path = "kanton/K4kant20220101gf_ch2007Poly.shp",
-  mountain_path = "berggebiete/K4_bgbr20210101gf_ch2007Poly.shp",
-  lake_path = "see/k4seenyyyymmdd11_ch2007Poly.shp",
-  title = "Map",
-  points_df = df,
-  point_color = "Birch",
-  point_size = 2.5,
-  heatmap = TRUE
-)
