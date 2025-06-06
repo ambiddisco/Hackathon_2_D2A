@@ -32,8 +32,8 @@ plot_cantons <- function(
     title = "Map"
 ) {
 
-  cantons <- sf::st_read(canton_path, quiet = TRUE) |> sf::st_transform(map_crs)
-  lakes <- if (!is.null(lake_path)) sf::st_read(lake_path, quiet = TRUE) |> sf::st_transform(map_crs) else NULL
+  cantons <- sf::st_read(get_map_path("kanton"), quiet = TRUE) |> sf::st_transform(map_crs)
+  lakes <-  st_read(get_map_path("see"), quiet = TRUE) |> st_transform(map_crs)
 
   value_df <- value_df |>
     dplyr::rename(name = canton) |>
@@ -62,16 +62,3 @@ plot_cantons <- function(
 
   print(p)
 }
-
-
-
-
-df <- read.csv("canton_pollen_aggregated.csv")
-
-plot_cantons(
-  canton_path = "kanton/K4kant20220101gf_ch2007Poly.shp",
-  lake_path = "see/k4seenyyyymmdd11_ch2007Poly.shp",
-  value_df = df,
-  value_colname = "avg",
-  title = "Map by Canton"
-)
