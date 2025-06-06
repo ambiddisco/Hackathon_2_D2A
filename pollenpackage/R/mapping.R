@@ -32,74 +32,101 @@ library(ggplot2)
 #' @export
 #'
 plot_map <- function(
-    canton_type = "kanton",
-    mountain_type = "berggebiete",
-    lake_type = NULL,
+    canton_path,
+    mountain_path,
+    lake_path = NULL,
     points_df = NULL,
     points_crs = 4326,
     map_crs = 2056,
-    base_fill = rgb(176/256, 227/256, 170/256),
-    mountain_fill = "antiquewhite2",
+    base_fill = rgb(217/256, 252/256, 221/256),
+    mountain_fill = rgb(252/256, 244/256, 217/256),
     lake_fill = "lightblue",
     border_color = "black",
     point_color = "red",
     point_size = 2,
     show_labels = TRUE,
-    title = "Map"
+    title = "Map",
+    heatmap = FALSE
 ) {
-  # Load spatial data using helper
-  canton_path <- get_map_path(canton_type)
-  mountain_path <- get_map_path(mountain_type)
-  lake_path <- if (!is.null(lake_type)) get_map_path(lake_type) else NULL
-  
-  cantons <- sf::st_read(canton_path, quiet = TRUE) |> sf::st_transform(map_crs)
-  mountains <- sf::st_read(mountain_path, quiet = TRUE) |> sf::st_transform(map_crs)
-  lakes <- if (!is.null(lake_path)) sf::st_read(lake_path, quiet = TRUE) |> sf::st_transform(map_crs) else NULL
-  
-  # Base map
-  p <- ggplot2::ggplot() +
-    ggplot2::geom_sf(data = cantons, fill = base_fill, color = NA) +
-    ggplot2::geom_sf(data = mountains, fill = mountain_fill, color = NA, alpha = 1)
-  
-  # Lakes
+
+  cantons <- st_read(canton_path, quiet = TRUE) |> st_transform(map_crs)
+  mountains <- st_read(mountain_path, quiet = TRUE) |> st_transform(map_crs)
+  lakes <- if (!is.null(lake_path)) st_read(lake_path, quiet = TRUE) |> st_transform(map_crs) else NULL
+
+  p <- ggplot() +
+    geom_sf(data = cantons, fill = base_fill, color = NA) +
+    geom_sf(data = mountains, fill = mountain_fill, color = NA, alpha = 1)
+
   if (!is.null(lakes)) {
-    p <- p + ggplot2::geom_sf(data = lakes, fill = lake_fill, color = NA, alpha = 1)
+    p <- p + geom_sf(data = lakes, fill = lake_fill, color = NA, alpha = 1)
   }
-  
-  # Borders
-  p <- p + ggplot2::geom_sf(data = cantons, fill = NA, color = border_color, size = 0.5)
-  
-  # Points
+  p <- p + geom_sf(data = cantons, fill = NA, color = border_color, size = 0.5)
+
   if (!is.null(points_df)) {
-    points_sf <- sf::st_as_sf(points_df, coords = c("lon", "lat"), crs = points_crs) |> sf::st_transform(map_crs)
-    
+    points_sf <- st_as_sf(points_df, coords = c("lon", "lat"), crs = points_crs) |>
+      st_transform(map_crs)
+
     if (!is.null(point_color) && point_color %in% colnames(points_df)) {
-      p <- p + ggplot2::geom_sf(data = points_sf, ggplot2::aes(color = .data[[point_color]]), size = point_size) +
-        ggplot2::scale_color_viridis_c(option = "plasma", name = point_color)
+      if (heatmap) {
+        # HEATMAP MODE
+        coords <- st_coordinates(points_sf)
+        values <- points_sf[[point_color]]
+        sp_points <- as(points_sf, "Spatial")
+
+        bbox <- st_bbox(cantons)
+        grd <- raster::raster(
+          xmn = bbox["xmin"], xmx = bbox["xmax"],
+          ymn = bbox["ymin"], ymx = bbox["ymax"],
+          resolution = 500,
+          crs = crs(sp_points)
+        )
+        projection(grd) <- crs(sp_points)
+        grd <- as(grd, "SpatialPixels")
+
+        gstat_model <- gstat::gstat(formula = as.formula(paste(point_color, "~ 1")), data = sp_points, nmax = 7, set = list(idp = 2.0))
+        interp <- predict(gstat_model, newdata = grd)
+        interp_r <- raster::rasterFromXYZ(as.data.frame(interp)[, c("x", "y", "var1.pred")])
+
+        interp_df <- as.data.frame(rasterToPoints(interp_r))
+        colnames(interp_df) <- c("x", "y", "value")
+
+        p <- p +
+          geom_raster(data = interp_df, aes(x = x, y = y, fill = value, alpha = pmin(pmax(value, 0), 3))) +
+          scale_fill_gradientn(
+            colours = c(NA, "blue", "orange", "red"),
+            na.value = NA,
+            name = point_color
+          ) +
+          scale_alpha_continuous(range = c(0, 1), guide = "none")
+
+      } else {
+        # POINT MODE
+        p <- p + geom_sf(data = points_sf, aes(color = .data[[point_color]]), size = point_size) +
+          scale_color_viridis_c(option = "plasma", name = point_color)
+      }
     } else {
-      p <- p + ggplot2::geom_sf(data = points_sf, color = point_color, size = point_size)
+      p <- p + geom_sf(data = points_sf, color = point_color, size = point_size)
     }
-    
-    if (show_labels && "label" %in% colnames(points_df)) {
-      coords <- sf::st_coordinates(points_sf)
+
+    if (!heatmap && show_labels && "label" %in% colnames(points_df)) {
+      coords <- st_coordinates(points_sf)
       points_sf$X <- coords[,1]
       points_sf$Y <- coords[,2]
-      p <- p + ggplot2::geom_text(data = points_sf, ggplot2::aes(x = X, y = Y, label = label),
-                                  size = 3, color = "black", nudge_y = 1000)
+      p <- p + geom_text(data = points_sf, aes(x = X, y = Y, label = label),
+                         size = 3, color = "black", nudge_y = 1000)
     }
   }
-  
-  # Styling
+
   p <- p +
-    ggplot2::ggtitle(title) +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      plot.background = ggplot2::element_rect(fill = "white", color = NA),
-      panel.background = ggplot2::element_rect(fill = "white", color = NA),
-      axis.text = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank()
+    ggtitle(title) +
+    theme_minimal() +
+    theme(
+      plot.background = element_rect(fill = "white", color = NA),
+      panel.background = element_rect(fill = "white", color = NA),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      panel.grid = element_blank()
     )
-  
+
   print(p)
 }
