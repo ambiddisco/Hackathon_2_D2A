@@ -14,8 +14,7 @@ Description: This package contains exploration of pollen statistics in Switzerla
   It is created by Group 2 of the Hackathon Final project.
 Imports: sf,
   httr2,
-  ggplot2,
-  readr
+  ggplot2
 Suggests: testthat (>= 3.0.0),
   knitr,
   rmarkdown
