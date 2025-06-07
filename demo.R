@@ -1,8 +1,8 @@
 library(pollenpackage)
 
-#Changing the name in value_colname or point_color change the shown
+#Changing the name in value_colname or point_color change the shown data (avg is average between all polens, Oak is oak, birch, etc...)
 
-df <- read.csv("canton_pollen_aggregated.csv")
+df <- get_canton_pollen_forecast()
 
 plot_cantons(
   value_df = df,
@@ -20,7 +20,7 @@ plot_cantons(
 
 
 
-file_name = "swiss_city_pollen_data.csv"
+file_name = get_pollen_forecast()
 df = read.csv(file_name)
 
 plot_map(
