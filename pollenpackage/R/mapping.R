@@ -1,6 +1,3 @@
-library(sf)
-library(ggplot2)
-
 #' plot_map plots a map of Switzerland with data about pollen
 #'
 #' @param points_df a tibble or dataframe, contains a list of all points to be
@@ -26,16 +23,16 @@ library(ggplot2)
 #' @param title the title of the graph
 #' @param heatmap a boolean value; if TRUE, plots points as a heatmap based on the `point_color` column
 #' @returns Nothing, plots graph directly
-#' @import raster
-#' @import gstat
+#' @importFrom raster raster rasterToPoints rasterFromXYZ
+#' @importFrom gstat gstat 
 #' @export
 #'
 plot_map <- function(
     points_df = NULL,
     points_crs = 4326,
     map_crs = 2056,
-    base_fill = rgb(217/256, 252/256, 221/256),
-    mountain_fill = rgb(252/256, 244/256, 217/256),
+    base_fill = grDevices::rgb(217/256, 252/256, 221/256),
+    mountain_fill = grDevices::rgb(252/256, 244/256, 217/256),
     lake_fill = "lightblue",
     border_color = "black",
     point_color = "red",
@@ -67,7 +64,7 @@ plot_map <- function(
         # HEATMAP MODE
         coords <- st_coordinates(points_sf)
         values <- points_sf[[point_color]]
-        sp_points <- as(points_sf, "Spatial")
+        sp_points <- methods::as(points_sf, "Spatial")
 
         bbox <- st_bbox(cantons)
         grd <- raster::raster(
@@ -77,10 +74,10 @@ plot_map <- function(
           crs = crs(sp_points)
         )
         projection(grd) <- crs(sp_points)
-        grd <- as(grd, "SpatialPixels")
+        grd <- methods::as(grd, "SpatialPixels")
 
         gstat_model <- gstat::gstat(formula = as.formula(paste(point_color, "~ 1")), data = sp_points, nmax = 7, set = list(idp = 2.0))
-        interp <- predict(gstat_model, newdata = grd)
+        interp <- gstat::predict(gstat_model, newdata = grd)
         interp_r <- raster::rasterFromXYZ(as.data.frame(interp)[, c("x", "y", "var1.pred")])
 
         interp_df <- as.data.frame(rasterToPoints(interp_r))

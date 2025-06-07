@@ -18,15 +18,16 @@ Imports:
     ggplot2,
     gstat,
     raster,
-    grDevices,
-    methods,
     stats,
     utils,
-    dplyr,
-    readr
+    dplyr, 
+    grDevices,
+    methods
 Suggests: testthat (>= 3.0.0),
   knitr,
-  rmarkdown
+  rmarkdown,
+  readr,
+  tibble
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

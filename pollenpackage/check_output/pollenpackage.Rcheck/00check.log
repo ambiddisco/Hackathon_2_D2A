@@ -1,0 +1,80 @@
+* using log directory 'C:/Users/nicol/Documents/supsi_locale/data_project/Hackathon_2_D2A/pollenpackage/check_output/pollenpackage.Rcheck'
+* using R version 4.4.2 (2024-10-31 ucrt)
+* using platform: x86_64-w64-mingw32
+* R was compiled by
+    gcc.exe (GCC) 13.3.0
+    GNU Fortran (GCC) 13.3.0
+* running under: Windows 11 x64 (build 26100)
+* using session charset: UTF-8
+* using options '--no-manual --as-cran'
+* checking for file 'pollenpackage/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'pollenpackage' version '0.1.0'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking serialization versions ... OK
+* checking whether package 'pollenpackage' can be installed ... [28s] WARNING
+Found the following significant warnings:
+  Warning: package 'sf' was built under R version 4.4.3
+  Warning: package 'ggplot2' was built under R version 4.4.3
+  Warning: replacing previous import 'dplyr::union' by 'raster::union' when loading 'pollenpackage'
+  Warning: replacing previous import 'dplyr::intersect' by 'raster::intersect' when loading 'pollenpackage'
+  Warning: replacing previous import 'dplyr::select' by 'raster::select' when loading 'pollenpackage'
+  Warning: replacing previous import 'raster::predict' by 'stats::predict' when loading 'pollenpackage'
+  Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading 'pollenpackage'
+  Warning: replacing previous import 'raster::quantile' by 'stats::quantile' when loading 'pollenpackage'
+  Warning: replacing previous import 'dplyr::filter' by 'stats::filter' when loading 'pollenpackage'
+  Warning: replacing previous import 'raster::aggregate' by 'stats::aggregate' when loading 'pollenpackage'
+  Warning: replacing previous import 'raster::weighted.mean' by 'stats::weighted.mean' when loading 'pollenpackage'
+  Warning: replacing previous import 'raster::density' by 'stats::density' when loading 'pollenpackage'
+  Warning: replacing previous import 'raster::update' by 'stats::update' when loading 'pollenpackage'
+See 'C:/Users/nicol/Documents/supsi_locale/data_project/Hackathon_2_D2A/pollenpackage/check_output/pollenpackage.Rcheck/00install.out' for details.
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [29s] OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... [82s] OK
+Examples with CPU (user + system) or elapsed time > 5s
+                           user system elapsed
+get_pollen_forecast        1.50   0.17   41.20
+get_canton_pollen_forecast 1.02   0.06   30.44
+* checking for unstated dependencies in 'tests' ... OK
+* checking tests ... OK
+  Running 'testthat.R'
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 WARNING, 1 NOTE

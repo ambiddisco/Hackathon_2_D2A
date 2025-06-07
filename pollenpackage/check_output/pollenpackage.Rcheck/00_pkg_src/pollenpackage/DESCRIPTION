@@ -1,0 +1,30 @@
+Package: pollenpackage
+Type: Package
+Title: Hackathon Final Project - Pollen Analysis in Switzerland
+Version: 0.1.0
+Authors@R: c(
+    person("Alexandra", "Biddiscombe", email = "alexandra.bidiscombe@student.supsi.ch", role = c("aut", "cre")),
+    person("Alessandro", "Carnio", role = "aut"),
+    person("Manuel", "Cattoni", role = "aut"),
+    person("Paolo", "Nicolet", role = "aut"),
+    person("Kadir", "Özden", role = "aut"),
+    person("Tommaso", "Pioda", role = "aut")
+  )
+Description: This package contains exploration of pollen statistics in Switzerland.
+  It is created by Group 2 of the Hackathon Final project.
+Imports: sf, httr2, ggplot2, gstat, raster, stats, utils, dplyr,
+        grDevices, methods
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, readr, tibble
+License: MIT + file LICENSE
+Encoding: UTF-8
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
+NeedsCompilation: no
+Packaged: 2025-06-07 07:57:00 UTC; nicol
+Author: Alexandra Biddiscombe [aut, cre],
+  Alessandro Carnio [aut],
+  Manuel Cattoni [aut],
+  Paolo Nicolet [aut],
+  Kadir Özden [aut],
+  Tommaso Pioda [aut]
+Maintainer: Alexandra Biddiscombe <alexandra.bidiscombe@student.supsi.ch>

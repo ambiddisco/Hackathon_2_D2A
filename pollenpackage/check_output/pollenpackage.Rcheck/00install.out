@@ -1,0 +1,47 @@
+* installing *source* package 'pollenpackage' ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Warning: replacing previous import 'dplyr::union' by 'raster::union' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::intersect' by 'raster::intersect' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::select' by 'raster::select' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::predict' by 'stats::predict' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::quantile' by 'stats::quantile' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::filter' by 'stats::filter' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::aggregate' by 'stats::aggregate' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::weighted.mean' by 'stats::weighted.mean' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::density' by 'stats::density' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::update' by 'stats::update' when loading 'pollenpackage'
+Warning: package 'sf' was built under R version 4.4.3
+Warning: package 'ggplot2' was built under R version 4.4.3
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+Warning: replacing previous import 'dplyr::union' by 'raster::union' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::intersect' by 'raster::intersect' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::select' by 'raster::select' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::predict' by 'stats::predict' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::quantile' by 'stats::quantile' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::filter' by 'stats::filter' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::aggregate' by 'stats::aggregate' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::weighted.mean' by 'stats::weighted.mean' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::density' by 'stats::density' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::update' by 'stats::update' when loading 'pollenpackage'
+** testing if installed package can be loaded from final location
+Warning: replacing previous import 'dplyr::union' by 'raster::union' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::intersect' by 'raster::intersect' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::select' by 'raster::select' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::predict' by 'stats::predict' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::quantile' by 'stats::quantile' when loading 'pollenpackage'
+Warning: replacing previous import 'dplyr::filter' by 'stats::filter' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::aggregate' by 'stats::aggregate' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::weighted.mean' by 'stats::weighted.mean' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::density' by 'stats::density' when loading 'pollenpackage'
+Warning: replacing previous import 'raster::update' by 'stats::update' when loading 'pollenpackage'
+** testing if installed package keeps a record of temporary installation path
+* DONE (pollenpackage)
