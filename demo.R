@@ -20,8 +20,7 @@ plot_cantons(
 
 
 
-file_name = get_pollen_forecast()
-df = read.csv(file_name)
+points_df = get_pollen_forecast()
 
 plot_map(
   title = "Map",
