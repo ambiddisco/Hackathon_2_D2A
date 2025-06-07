@@ -21,10 +21,10 @@ plot_cantons(
 
 
 points_df = get_pollen_forecast()
-
+points_df
 plot_map(
   title = "Map",
-  points_df = df,
+  points_df = points_df,
   point_color = "Birch",
   point_size = 2.5,
   heatmap = TRUE
@@ -33,7 +33,7 @@ plot_map(
 
 plot_map(
   title = "Map",
-  points_df = df,
+  points_df = points_df,
   point_color = "avg",
   point_size = 2.5,
   heatmap = TRUE
