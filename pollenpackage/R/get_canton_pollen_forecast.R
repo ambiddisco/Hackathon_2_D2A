@@ -4,6 +4,7 @@
 #' @returns a dataframe containing pollen forecast per canton
 #' @import httr2
 #' @import stats
+#' @importFrom dplyr group_by summarise across all_of
 #' @export
 #'
 #' @examples get_canton_pollen_forecast() -> df
@@ -194,10 +195,10 @@ get_canton_pollen_forecast <- function(){
   # If df_points is empty, the aggregation will result in an empty data frame, which is fine.
   if (nrow(df_points) > 0) {
     df_cantons_aggregated <- df_points %>%
-      group_by(canton) %>%
-      summarise(
-        across(
-          c(avg, all_of(plants_list)), # Apply mean to 'avg' and all plant columns
+      dplyr::group_by(canton) %>%
+      dplyr::summarise(
+        dplyr::across(
+          c(avg, dplyr::all_of(plants_list)), # Apply mean to 'avg' and all plant columns
           ~ mean(., na.rm = TRUE)
         ),
         .groups = 'drop' # Remove grouping

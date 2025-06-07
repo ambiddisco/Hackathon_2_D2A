@@ -24,7 +24,7 @@
 #' @param heatmap a boolean value; if TRUE, plots points as a heatmap based on the `point_color` column
 #' @returns Nothing, plots graph directly
 #' @importFrom raster raster rasterToPoints rasterFromXYZ
-#' @importFrom gstat gstat 
+#' @importFrom gstat gstat
 #' @export
 #'
 plot_map <- function(
@@ -71,13 +71,13 @@ plot_map <- function(
           xmn = bbox["xmin"], xmx = bbox["xmax"],
           ymn = bbox["ymin"], ymx = bbox["ymax"],
           resolution = 500,
-          crs = crs(sp_points)
+          crs = raster::crs(sp_points)
         )
-        projection(grd) <- crs(sp_points)
+        raster::projection(grd) <- raster::crs(sp_points)
         grd <- methods::as(grd, "SpatialPixels")
 
         gstat_model <- gstat::gstat(formula = as.formula(paste(point_color, "~ 1")), data = sp_points, nmax = 7, set = list(idp = 2.0))
-        interp <- gstat::predict(gstat_model, newdata = grd)
+        interp <- predict(gstat_model, newdata = grd)
         interp_r <- raster::rasterFromXYZ(as.data.frame(interp)[, c("x", "y", "var1.pred")])
 
         interp_df <- as.data.frame(rasterToPoints(interp_r))
